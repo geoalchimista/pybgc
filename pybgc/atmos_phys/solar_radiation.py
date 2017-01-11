@@ -183,3 +183,8 @@ def solar_angle(dt, lat, lon, timezone=0.):
     #     ('solar elevation angle corrected', solar_elev_angle_corr), ])
 
     return(solar_angle_result)
+
+
+def blackbody_radiation():
+    """TODO: blackbody radiation as a function of wavelength or wavenumber."""
+    pass
