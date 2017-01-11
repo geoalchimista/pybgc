@@ -2,6 +2,7 @@
 Time series functions.
 
 (C) 4 Nov 2016, Wu Sun <wu.sun "at" ucla.edu>
+
 """
 from collections import namedtuple
 import numpy as np
@@ -30,7 +31,7 @@ def running_std(series, window_size):
 
     See Also
     --------
-    running_zscore : Running Z-score function.
+    `running_zscore` : Running Z-score function.
 
     """
     if len(series) < window_size:
@@ -79,7 +80,7 @@ def running_zscore(series, window_size, modified_zscore=False):
 
     See Also
     --------
-    running_std : Running standard deviation function.
+    `running_std` : Running standard deviation function.
 
     References
     ----------
@@ -135,12 +136,18 @@ def hourly_median(hours, obs, full_hour_levels=True):
 
     Returns
     -------
-    HourlyMedianResult : namedtuple
-        Unpack to get results of `hour_level`, `median`, `q1`, and `q3`.
+    hour_level : array_like
+        Unique hour levels.
+    median : array_like
+        Median values by hour, same in length as `hour_level`.
+    q1 : array_like
+        First quartile values by hour, same in length as `hour_level`.
+    q3 : array_like
+        Third quartile values by hour, same in length as `hour_level`.
 
     See Also
     --------
-    hourly_avg : Hourly average function.
+    `hourly_avg` : Hourly average function.
 
     """
     hours = np.round(np.array(hours))  # force to be numpy array
@@ -181,12 +188,16 @@ def hourly_avg(hours, obs, full_hour_levels=True, std_ddof=1):
 
     Returns
     -------
-    HourlyAverageResult : namedtuple
-        Unpack to get results of `hour_level`, `avg`, `std`.
+    hour_level : array_like
+        Unique hour levels.
+    avg : array_like
+        Average values by hour, same in length as `hour_level`.
+    std : array_like
+        Standard deviation values by hour, same in length as `hour_level`.
 
     See Also
     --------
-    hourly_median : Hourly median function.
+    `hourly_median` : Hourly median function.
 
     """
     hours = np.round(np.array(hours))  # force to be numpy array
