@@ -24,6 +24,7 @@ named_constants['molar gas constant'] = R_gas = sci_const.R  # J mol^-1 K^-1
 named_constants['standard atmosphere'] = p_std = sci_const.atm  # Pascal
 named_constants['zero Celsius'] = T_0 = sci_const.zero_Celsius  # Kelvin
 named_constants['standard acceleration of gravity'] = g = sci_const.g  # m s^-2
+named_constants['calorie'] = calorie = sci_const.calorie  # calorie in Joule
 
 
 # gas constants
