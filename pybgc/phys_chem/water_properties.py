@@ -2,6 +2,10 @@ import numpy as np
 from .. import constants
 
 
+T_0 = constants.T_0
+M_w = constants.M_w  # molar weight of water vapor, kg mol^-1
+
+
 def water_density(temp, kelvin=False):
     u"""
     Calculate water density as a function of temperature.
@@ -31,7 +35,7 @@ def water_density(temp, kelvin=False):
        General and Scientific Use. *J. Phys. Chem. Ref. Data*, 31, 387.
 
     """
-    T_k = np.array(temp, dtype='d') + (not kelvin) * constants.T_0
+    T_k = np.array(temp, dtype='d') + (not kelvin) * T_0
     # force temperature to be in Kelvin
 
     # critical temperature and density
@@ -92,7 +96,7 @@ def seawater_density(temp, salinity, kelvin=False):
         # The saturation concentration of NaCl in water is 360 g/L
         raise ValueError('Salinity error, oversaturation reached.')
 
-    T_c = np.array(temp, dtype='d') - kelvin * constants.T_0
+    T_c = np.array(temp, dtype='d') - kelvin * T_0
     # force temperature to be in Celsius
     salinity = np.array(salinity, dtype='d')
 
@@ -146,7 +150,7 @@ def water_dissoc(temp, kelvin=False):
 
     """
 
-    T_k = np.array(temp, dtype='d') + (not kelvin) * constants.T_0
+    T_k = np.array(temp, dtype='d') + (not kelvin) * T_0
     # force temperature to be in Kelvin
     n = 6.
     alpha_0 = -0.864671
@@ -155,7 +159,6 @@ def water_dissoc(temp, kelvin=False):
     beta_0 = 0.642044
     beta_1 = -56.8534
     beta_2 = -0.375754
-    M_w = constants.M_w  # in kg mol^-1 here
     rho_w = water_density(T_k, kelvin=True) * 1e-3  # in g cm^-3 here
 
     Z = rho_w * np.exp(alpha_0 + alpha_1 * T_k ** -1 +
@@ -168,3 +171,47 @@ def water_dissoc(temp, kelvin=False):
         pK_w_G + 2 * np.log10(M_w)
 
     return pK_w
+
+
+def latent_heat(temp, kelvin=False, ice=False):
+    """
+    Calculate the latent heat of vaporization of liquid water, or the latent
+    heat of fusion of ice at standard atmospheric pressure.
+
+    Warning: Do not use this function for latent heat of vaporization above
+    boiling point.
+
+    by Wu Sun <wu.sun "at" ucla.edu>, 02 Sep 2015
+
+    Parameters
+    ----------
+    temp : float or array_like
+        Temperature, by default in Celsius unless `kelvin` is set `True`.
+    kelvin : bool, optional
+        Temperature input is in Kelvin if enabled.
+    ice : bool, optional
+        Calculate the latent heat of fusion if enabled.
+
+    Returns
+    -------
+    L_v: float or array_like
+        Latent heat of vaporization in J mol^-1 (return this if `ice` is
+        set `False`).
+    L_f : float or array_like
+        Latent heat of fusion (melting) in J mol^-1 (return this if `ice` is
+        set `True`).
+
+    """
+    T_k = np.array(temp, dtype='d') + (not kelvin) * T_0
+    # force temperature to be in Kelvin
+
+    if not ice:
+        L_v = 1.91846e6 * (T_k / (T_k - 33.91)) ** 2 * M_w
+        L_v_sc = 56759 - 42.212 * T_k + \
+            np.exp(0.1149 * (281.6 - T_k))  # for supercooled water
+        L_v = L_v * (T_k >= 273.15) + L_v_sc * (T_k < 273.15)
+        return L_v
+    else:
+        L_f = 46782.5 + 35.8925 * T_k - 0.07414 * \
+            T_k ** 2 + 541.5 * np.exp(- (T_k / 123.75) ** 2)
+        return L_f

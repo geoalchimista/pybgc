@@ -55,7 +55,7 @@ def retention_curve(theta_w, texture_name, theta_sat=None, theta_res=None,
 
     if texture_name not in soil_textures:
         raise ValueError(
-            'Not a proper soil texture name. Allowed names are: %s' %
+            'Not a proper soil texture name. Allowed names are: "%s"' %
             ', '.join(soil_textures))
 
     texture_id = soil_textures.index(texture_name)
