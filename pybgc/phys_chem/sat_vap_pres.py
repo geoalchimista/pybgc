@@ -86,10 +86,10 @@ def p_sat_h2o(temp, ice=False, kelvin=False, method='gg'):
             u_T = 373.16 / T_k
             v_T = T_k / 373.16
             e_sat = (- 7.90298 * (u_T - 1) + 5.02808 * np.log10(u_T) -
-                     1.3816e-7 * (10**(11.344 * (1 - v_T)) - 1) +
-                     8.1328e-3 * (10**(- 3.49149 * (u_T - 1)) - 1) +
+                     1.3816e-7 * (10 ** (11.344 * (1 - v_T)) - 1) +
+                     8.1328e-3 * (10 ** (- 3.49149 * (u_T - 1)) - 1) +
                      np.log10(1013.246))
-            e_sat = 10**e_sat * 100
+            e_sat = 10 ** e_sat * 100
     else:
         if method == 'buck':
             T_c = T_k - 273.15  # temperature in Celsius degree
@@ -104,6 +104,6 @@ def p_sat_h2o(temp, ice=False, kelvin=False, method='gg'):
             v_T = T_k / 273.16
             e_sat = (- 9.09718 * (u_T - 1) - 3.56654 * np.log10(u_T) +
                      0.876793 * (1 - v_T) + np.log10(6.1071))
-            e_sat = 10**e_sat * 100
+            e_sat = 10 ** e_sat * 100
 
     return e_sat

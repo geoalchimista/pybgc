@@ -5,11 +5,11 @@ by Wu Sun <wu.sun "at" ucla.edu>, 23 Sep 2015
 
 References
 ----------
-.. [1] Trenberth, K. E. and Smith, L. (2005). The Mass of the Atmosphere:
+.. [TS05] Trenberth, K. E. and Smith, L. (2005). The Mass of the Atmosphere:
    A Constraint on Global Analyses. *Journal of Climate*, 18, 864-875.
-.. [2] Or, D. and Wraith, J. M. (2002). Soil Water Content and Water
-   Potential Relationships, in Warrick, A. W. (eds.)
-   *Soil Physics Companion*, pp 81-82., CRC Press, Boca Raton, FL, USA.
+.. [OW02] Or, D. and Wraith, J. M. (2002). Soil Water Content and Water
+   Potential Relationships, in Warrick, A. W. (eds.) *Soil Physics Companion*,
+   pp 81-82., CRC Press, Boca Raton, FL, USA.
 
 """
 import scipy.constants.constants as sci_const
@@ -28,7 +28,7 @@ named_constants['standard acceleration of gravity'] = g = sci_const.g  # m s^-2
 
 # gas constants
 named_constants['dry air molar weight'] = M_d = 28.97e-3  # kg mol^-1
-named_constants['water molar weight'] = M_w = 18.01528e-3  # kg mol^-1
+named_constants['water molar weight'] = M_w = 18.015268e-3  # kg mol^-1
 named_constants['air concentration at STP'] = air_conc_stp = \
     p_std / R_gas / T_0  # mol m^-3
 named_constants['molar volume at STP'] = 1. / air_conc_stp  # m^3 mol^-1
