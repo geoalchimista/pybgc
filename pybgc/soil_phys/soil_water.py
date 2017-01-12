@@ -51,7 +51,27 @@ def retention_curve(theta_w, texture_name, theta_sat=None, theta_res=None,
     """
     g = constants.g  # Earth's gravity
     soil_textures = constants.soil_textures
-    retention_curve_params = constants.retention_curve_params
+    # retention curve parameters from NRCS database
+    # alpha converted to m^-1; K_sat converted to m s^-1
+    retention_curve_params = np.zeros(
+        (len(soil_textures), ),
+        dtype=[('theta_res', 'f8'), ('theta_sat', 'f8'), ('alpha', 'f8'),
+               ('n', 'f8'), ('K_sat', 'f8')])
+    retention_curve_params['theta_res'] = \
+        np.array([0.045, 0.057, 0.065, 0.078, 0.034, 0.067,
+                  0.100, 0.095, 0.089, 0.1, 0.07, 0.068])
+    retention_curve_params['theta_sat'] = \
+        np.array([0.43, 0.41, 0.41, 0.43, 0.46, 0.45,
+                  0.39, 0.41, 0.43, 0.38, 0.36, 0.38])
+    retention_curve_params['alpha'] = \
+        np.array([0.145, 0.124, 0.075, 0.036, 0.016, 0.020,
+                  0.059, 0.019, 0.01, 0.027, 0.005, 0.008]) * 100
+    retention_curve_params['n'] = \
+        np.array([2.68, 2.28, 1.89, 1.56, 1.37, 1.41,
+                  1.48, 1.31, 1.23, 1.23, 1.09, 1.09])
+    retention_curve_params['K_sat'] = \
+        np.array([712.8, 350.2, 106.1, 25.0, 6.00, 10.8,
+                  31.4, 6.24, 1.68, 2.88, 0.48, 4.80]) / 8.64e4 * 1e-2
 
     if texture_name not in soil_textures:
         raise ValueError(
