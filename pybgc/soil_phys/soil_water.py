@@ -2,7 +2,7 @@ import numpy as np
 from .. import constants
 
 
-def retention_curve(theta_w, texture, theta_sat=None, theta_res=None,
+def retention_curve(theta_w, texture_name, theta_sat=None, theta_res=None,
                     pascal=True):
     """
     Calculate soil matric potential (or matric head) and hydraulic
@@ -14,7 +14,7 @@ def retention_curve(theta_w, texture, theta_sat=None, theta_res=None,
     ----------
     theta_w : float or array_like
         Soil volumetric water content (m^3 m^-3).
-    texture : str
+    texture_name : str
         Name of soil texture.
     theta_sat : float or array_like, optional
         Saturated soil water content (m^3 m^-3).
@@ -37,7 +37,7 @@ def retention_curve(theta_w, texture, theta_sat=None, theta_res=None,
     Raises
     ------
     ValueError
-        If the soil texture name is not a proper one in the predefined list.
+        If soil `texture_name` is not a proper one in the predefined list.
 
     References
     ----------
@@ -53,12 +53,12 @@ def retention_curve(theta_w, texture, theta_sat=None, theta_res=None,
     soil_textures = constants.soil_textures
     retention_curve_params = constants.retention_curve_params
 
-    if texture not in soil_textures:
+    if texture_name not in soil_textures:
         raise ValueError(
             'Not a proper soil texture name. Allowed names are: %s' %
             ', '.join(soil_textures))
 
-    texture_id = soil_textures.index(texture)
+    texture_id = soil_textures.index(texture_name)
 
     if theta_sat is None:
         theta_sat = retention_curve_params['theta_sat'][texture_id]
