@@ -1,9 +1,4 @@
-"""
-Regression functions.
-
-(C) 4 Nov 2016, Wu Sun <wu.sun "at" ucla.edu>
-
-"""
+"""Regression functions."""
 from collections import namedtuple
 import numpy as np
 from scipy import stats
@@ -12,6 +7,8 @@ from scipy import stats
 def linregress_no_intercept(x, y):
     """
     Do a linear regression without intercept for two sets of measurements.
+
+    by Wu Sun <wu.sun "at" ucla.edu>, 4 Nov 2016
 
     Parameters
     ----------

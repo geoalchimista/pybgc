@@ -8,7 +8,7 @@ def retention_curve(theta_w, texture, theta_sat=None, theta_res=None,
     Calculate soil matric potential (or matric head) and hydraulic
     conductivity.
 
-    (C) 09 Sep 2015, Wu Sun <wu.sun "at" ucla.edu>
+    by Wu Sun <wu.sun "at" ucla.edu>, 09 Sep 2015
 
     Parameters
     ----------

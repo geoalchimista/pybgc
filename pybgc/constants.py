@@ -1,7 +1,7 @@
 """
 List of physical constants.
 
-(C) 23 Sep 2015, Wu Sun <wu.sun "at" ucla.edu>
+by Wu Sun <wu.sun "at" ucla.edu>, 23 Sep 2015
 
 References
 ----------
