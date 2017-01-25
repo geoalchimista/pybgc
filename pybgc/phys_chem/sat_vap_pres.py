@@ -136,11 +136,6 @@ def dew_temp(e_sat, guess=25., kelvin=False, method='gg'):
     T_dew : float
         Dew temperature.
 
-    Raises
-    ------
-    AssertionError
-        If the argument `e_sat` is not float or int.
-
     Examples
     --------
     >>> dew_temp(3165)
@@ -154,10 +149,7 @@ def dew_temp(e_sat, guess=25., kelvin=False, method='gg'):
 
     """
     def __e_sat_residual(T, e_sat, kelvin, method):
-        return(p_sat_h2o(T, kelvin=kelvin, method=method) - e_sat)
-
-    assert type(e_sat) is float or type(e_sat) is int, \
-        "Takes a single value as the argument, array not allowed."
+        return p_sat_h2o(T, kelvin=kelvin, method=method) - e_sat
 
     if kelvin:
         guess += T_0
