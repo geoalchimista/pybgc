@@ -9,7 +9,7 @@ def p_sat_h2o(temp, ice=False, kelvin=False, method='gg'):
     """
     Calculate saturation vapor pressure over water or ice at a temperature.
 
-    by Wu Sun <wu.sun "at" ucla.edu>, 14 Sep 2014
+    by Wu Sun <wu.sun@ucla.edu>, 14 Sep 2014
 
     Parameters
     ----------
@@ -69,7 +69,7 @@ def p_sat_h2o(temp, ice=False, kelvin=False, method='gg'):
     165.287132017
 
     """
-    T_k = np.array(temp, dtype='d') + (not kelvin) * constants.T_0
+    T_k = np.array(temp, dtype='d') + (not kelvin) * T_0
     # force temperature to be in Kelvin
 
     if (np.sum(T_k > 273.16) and ice):
@@ -119,7 +119,8 @@ def dew_temp(e_sat, guess=25., kelvin=False, method='gg'):
     Parameters
     ----------
     e_sat : float
-        Saturation vapor pressure in Pascal.
+        Saturation vapor pressure in Pascal. Takes only a single value,
+        no array allowed.
     guess : float, optional
         An initial guess for the dew temperature to infer.
     kelvin : bool, optional
@@ -135,6 +136,11 @@ def dew_temp(e_sat, guess=25., kelvin=False, method='gg'):
     T_dew : float
         Dew temperature.
 
+    Raises
+    ------
+    AssertionError
+        If the argument `e_sat` is not float or int.
+
     Examples
     --------
     >>> dew_temp(3165)
@@ -149,6 +155,9 @@ def dew_temp(e_sat, guess=25., kelvin=False, method='gg'):
     """
     def __e_sat_residual(T, e_sat, kelvin, method):
         return(p_sat_h2o(T, kelvin=kelvin, method=method) - e_sat)
+
+    assert type(e_sat) is float or type(e_sat) is int, \
+        "Takes a single value as the argument, array not allowed."
 
     if kelvin:
         guess += T_0
