@@ -1,5 +1,8 @@
 import numpy as np
+from scipy import optimize
 from .. import constants
+
+T_0 = constants.T_0
 
 
 def p_sat_h2o(temp, ice=False, kelvin=False, method='gg'):
@@ -75,11 +78,11 @@ def p_sat_h2o(temp, ice=False, kelvin=False, method='gg'):
 
     if not ice:
         if method == 'buck':
-            T_c = T_k - 273.15  # temperature in Celsius degree
+            T_c = T_k - T_0  # temperature in Celsius degree
             e_sat = 6.1121 * np.exp((18.678 - T_c / 234.5) *
                                     T_c / (257.14 + T_c)) * 100
         elif method == 'cimo':
-            T_c = T_k - 273.15  # temperature in Celsius degree
+            T_c = T_k - T_0  # temperature in Celsius degree
             e_sat = 6.112 * np.exp(17.62 * T_c / (243.12 + T_c)) * 100
         else:
             # Goff-Gratch equation by default
@@ -92,11 +95,11 @@ def p_sat_h2o(temp, ice=False, kelvin=False, method='gg'):
             e_sat = 10 ** e_sat * 100
     else:
         if method == 'buck':
-            T_c = T_k - 273.15  # temperature in Celsius degree
+            T_c = T_k - T_0  # temperature in Celsius degree
             e_sat = 6.1115 * np.exp((23.036 - T_c / 333.7) *
                                     T_c / (279.82 + T_c)) * 100
         elif method == 'cimo':
-            T_c = T_k - 273.15  # temperature in Celsius degree
+            T_c = T_k - T_0  # temperature in Celsius degree
             e_sat = 6.112 * np.exp(22.46 * T_c / (272.62 + T_c)) * 100
         else:
             # Goff-Gratch equation by default
@@ -107,3 +110,50 @@ def p_sat_h2o(temp, ice=False, kelvin=False, method='gg'):
             e_sat = 10 ** e_sat * 100
 
     return e_sat
+
+
+def dew_temp(e_sat, guess=25., kelvin=False, method='gg'):
+    """
+    Calculate dew temperature from water concentration.
+
+    Parameters
+    ----------
+    e_sat : float
+        Saturation vapor pressure in Pascal.
+    guess : float, optional
+        An initial guess for the dew temperature to infer.
+    kelvin : bool, optional
+        Dew temperature calculated is in Kelvin if enabled.
+    method : str, optional
+        Method used to evaluate saturation vapor pressure.
+        'gg': default, Goff-Gratch equation (1946). [GG46]_
+        'buck': Buck Research Instruments L.L.C. (1996). [B96]_
+        'cimo': CIMO Guide (2008). [WMO]_
+
+    Returns
+    -------
+    T_dew : float
+        Dew temperature.
+
+    Examples
+    --------
+    >>> dew_temp(3165)
+    24.998963153421172
+
+    >>> dew_temp(610)
+    -0.0075798295337097081
+
+    >>> dew_temp(3165, kelvin=True)
+    298.14896315342116
+
+    """
+    def __e_sat_residual(T, e_sat, kelvin, method):
+        return(p_sat_h2o(T, kelvin=kelvin, method=method) - e_sat)
+
+    if kelvin:
+        guess += T_0
+
+    T_dew = optimize.newton(__e_sat_residual, x0=guess,
+                            args=(e_sat, kelvin, method))
+
+    return T_dew
