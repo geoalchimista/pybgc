@@ -25,6 +25,9 @@ named_constants['standard atmosphere'] = p_std = sci_const.atm  # Pascal
 named_constants['zero Celsius'] = T_0 = sci_const.zero_Celsius  # Kelvin
 named_constants['standard acceleration of gravity'] = g = sci_const.g  # m s^-2
 named_constants['calorie'] = calorie = sci_const.calorie  # calorie in Joule
+named_constants['Planck constant'] = h = sci_const.h  # [J s]
+named_constants['speed of light'] = c = sci_const.c  # [m s^-1]
+named_constants['Boltzmann constant'] = k_B = sci_const.k  # [J K^-1]
 
 
 # gas constants

@@ -185,6 +185,37 @@ def solar_angle(dt, lat, lon, timezone=0.):
     return(solar_angle_result)
 
 
-def blackbody_radiation():
-    """TODO: blackbody radiation as a function of wavelength or wavenumber."""
-    pass
+def planck_law(wavelength, temp, emissivity=1., kelvin=False):
+    """
+    Calculate spectral radiance from Planck's law.
+
+    Parameters
+    ----------
+    wavelength : float or array_like
+        Wavelength of the photon [m]
+    temp : float or array_like
+        Temperature of the radiating body. Default unit is Celsius. To use
+        Kelvin scale, set `kelvin=True`.
+    emissivity : float or array_like, optional
+        Emissivity of the radiating body [0 to 1]. Default is 1 for blackbody.
+    kelvin : boolean, optional
+        If False (default), temperature argument is in Celsius; if True,
+        temperature argument is in Kelvin.
+
+    Returns
+    -------
+    B_lambda: float or array_like
+        Spectral radiance [W sr^-1 m^-3]
+
+    """
+    T_k = temp + (not kelvin) * constants.T_0
+    c1 = 2. * constants.h * constants.c ** 2
+    c2 = constants.h * constants.c / constants.k_B
+    try:
+        B_lambda = emissivity * c1 * wavelength ** (-5.) / \
+            (np.exp(c2 / wavelength / T_k) - 1.)
+    except ZeroDivisionError:
+        # spectral radiance is zero at 0 K
+        # but needs to keep the array size the same
+        B_lambda = 0. * (wavelength + T_k)
+    return B_lambda
