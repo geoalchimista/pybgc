@@ -11,7 +11,7 @@ def solar_angle(dt, lat, lon, timezone=0.):
     Original program by `NOAA Global Radiation Group
     <http://www.esrl.noaa.gov/gmd/grad/solcalc/calcdetails.html>`_.
 
-    Translated to Python by Wu Sun <wu.sun "at" ucla.edu> on 23 Nov 2015.
+    Translated to Python by Wu Sun <wu.sun@ucla.edu> on 23 Nov 2015.
 
     Parameters
     ----------
@@ -27,7 +27,19 @@ def solar_angle(dt, lat, lon, timezone=0.):
     Returns
     -------
     solar_angle_result : namedtuple
-        Unpack the namedtuple to get results.
+        Unpack the namedtuple fields to get results.
+        - 'solar noon': local solar noon, in fraction of a day
+        - 'sunrise': sunrise time, in fraction of a day
+        - 'sunset': sunset time, in fraction of a day
+        - 'hour angle': hour angle, in degree
+        - 'solar zenith angle': solar zenith angle, in degree
+        - 'solar elevation angle': solar elevation angle, in degree
+        - 'solar azimuth angle': solar azimuth angle, in degree
+        - 'atmospheric refraction': atmospheric refraction, in degree
+        - 'solar zenith angle corrected': solar zenith angle corrected for
+          atmospheric refraction, in degree
+        - 'solar elevation angle corrected': solar elevation angle corrected
+          for atmospheric refraction, in degree
 
     Raises
     ------
@@ -159,28 +171,19 @@ def solar_angle(dt, lat, lon, timezone=0.):
         approx_atmos_refrac = \
             -20.774 / 3600. / np.tan(np.radians(solar_elev_angle))
 
+    solar_zenith_angle_corr = solar_zenith_angle - approx_atmos_refrac
     solar_elev_angle_corr = solar_elev_angle + approx_atmos_refrac
 
     SolarAngleResult = namedtuple(
         'SolarAngleResult', ('solar_noon', 'sunrise', 'sunset', 'hour_angle',
                              'solar_zenith_angle', 'solar_elevation_angle',
                              'solar_azimuth_angle', 'atmospheric_refraction',
+                             'solar_zenith_angle_corrected',
                              'solar_elevation_angle_corrected'))
     solar_angle_result = SolarAngleResult(
         solar_noon_local, sunrise_local, sunset_local, hour_angle,
         solar_zenith_angle, solar_elev_angle, solar_azimuth_angle,
-        approx_atmos_refrac, solar_elev_angle_corr)
-
-    # solar_angle_result = dict([
-    #     ('solar noon', solar_noon_local),
-    #     ('sunrise', sunrise_local),
-    #     ('sunset', sunset_local),
-    #     ('hour angle', hour_angle),
-    #     ('solar zenith angle', solar_zenith_angle),
-    #     ('solar elevation angle', solar_elev_angle),
-    #     ('solar azimuth angle', solar_azimuth_angle),
-    #     ('atmospheric refraction', approx_atmos_refrac),
-    #     ('solar elevation angle corrected', solar_elev_angle_corr), ])
+        approx_atmos_refrac, solar_zenith_angle_corr, solar_elev_angle_corr)
 
     return(solar_angle_result)
 
