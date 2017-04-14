@@ -1,7 +1,7 @@
 """
 Functions for summary statistics.
 
-(c) Wu Sun <wu.sun@ucla.edu> 25 Jan 2017
+by Wu Sun <wu.sun@ucla.edu>, 25 Jan 2017
 
 """
 import numpy as np

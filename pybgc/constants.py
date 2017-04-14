@@ -1,7 +1,7 @@
 """
 List of physical constants.
 
-by Wu Sun <wu.sun "at" ucla.edu>, 23 Sep 2015
+by Wu Sun <wu.sun@ucla.edu>, 23 Sep 2015
 
 References
 ----------
@@ -13,7 +13,6 @@ References
 
 """
 import scipy.constants.constants as sci_const
-import numpy as np
 
 # a dictionary for named constants
 named_constants = {}

@@ -7,10 +7,10 @@ M_w = constants.M_w  # molar weight of water vapor, kg mol^-1
 
 
 def water_density(temp, kelvin=False):
-    u"""
+    """
     Calculate water density as a function of temperature.
 
-    by Wu Sun <wu.sun "at" ucla.edu>, 29 Sep 2015
+    by Wu Sun <wu.sun@ucla.edu>, 29 Sep 2015
 
     Parameters
     ----------
@@ -62,7 +62,7 @@ def seawater_density(temp, salinity, kelvin=False):
 
     Applicable range: 1 atm, 0-40 C, 0.5-43 g kg^-1 salinity.
 
-    by Wu Sun <wu.sun "at" ucla.edu>, 29 Sep 2015
+    by Wu Sun <wu.sun@ucla.edu>, 29 Sep 2015
 
     Parameters
     ----------
@@ -124,7 +124,7 @@ def water_dissoc(temp, kelvin=False):
     """
     Calculate water dissociation constant (pK_w) as a function of temperature.
 
-    by Wu Sun <wu.sun "at" ucla.edu>, 29 Sep 2015
+    by Wu Sun <wu.sun@ucla.edu>, 29 Sep 2015
 
     Parameters
     ----------
@@ -181,7 +181,7 @@ def latent_heat(temp, kelvin=False, ice=False):
     Warning: Do not use this function for latent heat of vaporization above
     boiling point.
 
-    by Wu Sun <wu.sun "at" ucla.edu>, 02 Sep 2015
+    by Wu Sun <wu.sun@ucla.edu>, 02 Sep 2015
 
     Parameters
     ----------

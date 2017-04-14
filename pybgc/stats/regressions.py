@@ -8,7 +8,7 @@ def linregress_no_intercept(x, y):
     """
     Do a linear regression without intercept for two sets of measurements.
 
-    by Wu Sun <wu.sun "at" ucla.edu>, 4 Nov 2016
+    by Wu Sun <wu.sun@ucla.edu>, 4 Nov 2016
 
     Parameters
     ----------

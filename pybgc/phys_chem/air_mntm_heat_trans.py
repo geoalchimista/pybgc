@@ -3,7 +3,7 @@ Calculate heat and momentum transfer coefficients of air, including
 kinematic viscosity, dynamic viscosity, thermal diffusivity, and
 thermal conductivity.
 
-by Wu Sun <wu.sun "at" ucla.edu>, 01 Sep 2015
+by Wu Sun <wu.sun@ucla.edu>, 01 Sep 2015
 
 References
 ----------

@@ -1,7 +1,7 @@
 """
 Time series functions.
 
-(C) 4 Nov 2016, Wu Sun <wu.sun "at" ucla.edu>
+by Wu Sun <wu.sun@ucla.edu>, 4 Nov 2016
 
 """
 from collections import namedtuple

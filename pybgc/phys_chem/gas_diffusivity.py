@@ -1,7 +1,7 @@
 """
 A collection of functions of gas diffusivities in air, water, and soil media.
 
-by Wu Sun <wu.sun "at" ucla.edu>, 14 Sep 2014
+by Wu Sun <wu.sun@ucla.edu>, 14 Sep 2014
 
 """
 import numpy as np
@@ -189,7 +189,7 @@ def diffus_in_soil_air(gas_name, temp, total_poros, air_poros, pressure=p_std,
 
 
 def diffus_in_water(gas_name, temp, kelvin=False):
-    u"""
+    """
     Calculate the diffusivity of a gas in water (see the list below).
 
     Supported gases include He, Ne, Kr, Xe, Rn, H2, CH4, CO2 [J87]_,
@@ -250,7 +250,7 @@ def diffus_in_water(gas_name, temp, kelvin=False):
 
 def diffus_in_soil_water(gas_name, temp, total_poros, air_poros,
                          shape_param=4.9, texture_name=None, kelvin=False):
-    u"""
+    """
     Calculate the diffusivity of a gas in soil water (see the list below).
 
     Supported gases include He, Ne, Kr, Xe, Rn, H2, CH4, CO2 [J87]_,

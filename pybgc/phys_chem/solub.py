@@ -9,7 +9,7 @@ the general function.
 | Having own function? |  Y  |  Y |  Y  |   N    |
 | Seawater solubility? |  Y  |  Y |  N  |   N    |
 
-Wu Sun <wu.sun "at" ucla.edu>, 14 Sep 2014
+by Wu Sun <wu.sun@ucla.edu>, 14 Sep 2014
 
 @TODO: add CH4, N2O, H2, H2S, ...
 

@@ -75,11 +75,11 @@ def solar_angle(dt, lat, lon, timezone=0.):
         np.sin(np.radians(geom_mean_anom_sun) * 3) * 0.000289
     # solar true longitude
     sun_true_lon = geom_mean_lon_sun + sun_eq_ctr
-    # solar true anomaly
-    sun_true_anom = geom_mean_anom_sun + sun_eq_ctr
-    # solar rad vector in AUs
-    sun_rad_vector = (1.000001018 * (1. - ecc_earth**2)) / \
-        (1. + ecc_earth * np.cos(np.radians(sun_true_anom)))
+    # # solar true anomaly
+    # sun_true_anom = geom_mean_anom_sun + sun_eq_ctr
+    # # solar rad vector in AUs
+    # sun_rad_vector = (1.000001018 * (1. - ecc_earth**2)) / \
+    #     (1. + ecc_earth * np.cos(np.radians(sun_true_anom)))
     # solar apparent longitude
     sun_app_lon = sun_true_lon - 0.00569 - \
         0.00478 * np.sin(np.radians(125.04 - 1934.136 * julian_century))
@@ -91,9 +91,9 @@ def solar_angle(dt, lat, lon, timezone=0.):
 
     obliq_corr = mean_obliq_ecliptic + 0.00256 * \
         np.cos(np.radians(125.04 - 1934.136 * julian_century))
-    sun_rt_ascen = np.degrees(np.arctan2(
-        np.cos(np.radians(obliq_corr)) * np.sin(np.radians(sun_app_lon)),
-        np.cos(np.radians(sun_app_lon))))
+    # sun_rt_ascen = np.degrees(np.arctan2(
+    #     np.cos(np.radians(obliq_corr)) * np.sin(np.radians(sun_app_lon)),
+    #     np.cos(np.radians(sun_app_lon))))
     sun_declin = np.degrees(np.arcsin(
         np.sin(np.radians(obliq_corr)) * np.sin(np.radians(sun_app_lon))))
 
@@ -116,8 +116,8 @@ def solar_angle(dt, lat, lon, timezone=0.):
                         timezone * 60.) / 1440.  # in day
     sunrise_local = solar_noon_local - HA_sunrise * 4. / 1440.  # in day
     sunset_local = solar_noon_local + HA_sunrise * 4. / 1440.  # in day
-    sunlight_duration = 8. * HA_sunrise / 1440.  # in day
-    sunlight_duration_min = 8. * HA_sunrise  # in minutes
+    # sunlight_duration = 8. * HA_sunrise / 1440.  # in day
+    # sunlight_duration_min = 8. * HA_sunrise  # in minutes
 
     fractional_day = dt.hour / 24. + dt.minute / 1440. + \
         (dt.second + dt.microsecond * 1e-6) / 86400.
