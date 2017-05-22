@@ -11,9 +11,9 @@ from ..phys_chem.water_properties import water_dissoc
 T_0 = constants.T_0
 params_hydrol_cos = {
     'e89': [2.11834513803e-5, 10418.3722377, 14.16881179, 6469.11889197],
-    'e89_original': [2.145674000903277e-5, 10450, 12.701762133763484, 6040],
+    'e89_original': [2.145674000903277e-5, 10450., 12.701762133763484, 6040.],
     'rc94': [1.63838819502e-5, 6444.02904777, 11.7115101829, 2427.27401921],
-    'rc94_original': [1.6805937699342022e-5, 6468, 2.3359419797800687, 4428],
+    'rc94_original': [1.6805937699342022e-5, 6468., 2.3359419797800687, 4428.],
     'k03': [9.60317126325e-6, 12110., 19.1176322696, 11580.],
 }
 
@@ -80,5 +80,5 @@ def hydrolysis_cos(temp, pH=7, kelvin=False, seawater=False, method='e89'):
     # OH concentration [mol L^-1]
 
     k_hyd = params[0] * np.exp(-params[1] * (1. / T_k - 1. / T_ref)) + \
-        params[2] * np.exp(- params[3] * (1. / T_k - 1. / T_ref)) * c_OH
+        params[2] * np.exp(-params[3] * (1. / T_k - 1. / T_ref)) * c_OH
     return k_hyd
