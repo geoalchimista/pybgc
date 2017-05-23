@@ -197,7 +197,7 @@ def solub_cos(temp, pressure=p_std, kelvin=False, bunsen=True):
     pressure = np.array(pressure, dtype='d')
 
     # coefficients from fitting Elliott et al. (1989) data
-    kcc_cos = T_k * np.exp(4050.32 / T_k - 20.0007) * p_std / pressure
+    kcc_cos = T_k * np.exp(4050.32 / T_k - 20.0007)
 
     if bunsen:
         return kcc_cos
