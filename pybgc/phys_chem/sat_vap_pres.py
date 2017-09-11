@@ -154,7 +154,10 @@ def dew_temp(e_sat, guess=25., kelvin=False, method='gg'):
     if kelvin:
         guess += T_0
 
-    T_dew = optimize.newton(__e_sat_residual, x0=guess,
-                            args=(e_sat, kelvin, method))
+    try:
+        T_dew = optimize.newton(__e_sat_residual, x0=guess,
+                                args=(e_sat, kelvin, method))
+    except RuntimeError:
+        T_dew = np.nan
 
     return T_dew
